@@ -22,6 +22,8 @@
 		ED4426E92933E5AA00788069 /* RocketPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4426E82933E5AA00788069 /* RocketPageViewController.swift */; };
 		ED4426EB2933E75300788069 /* RocketViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4426EA2933E75300788069 /* RocketViewBuilder.swift */; };
 		ED4426EE2933E7D100788069 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4426ED2933E7D100788069 /* Rocket.swift */; };
+		ED522AEA296E061C00ECBF6B /* Int+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED522AE9296E061C00ECBF6B /* Int+Ext.swift */; };
+		ED522AEC296E091400ECBF6B /* NSMutableAttributedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED522AEB296E091400ECBF6B /* NSMutableAttributedString+Ext.swift */; };
 		EDA2BE27296B2F1500B1875A /* LaunchesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA2BE24296B2F1500B1875A /* LaunchesPresenter.swift */; };
 		EDA2BE28296B2F1500B1875A /* LaunchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA2BE25296B2F1500B1875A /* LaunchesViewController.swift */; };
 		EDA2BE2E296B321E00B1875A /* Launches.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA2BE2D296B321E00B1875A /* Launches.swift */; };
@@ -40,6 +42,7 @@
 		EDB6C0CE2964F10700449CE9 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6C0CD2964F10700449CE9 /* Date+Ext.swift */; };
 		EDB6C0D02964F45E00449CE9 /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6C0CF2964F45E00449CE9 /* HeaderLabel.swift */; };
 		EDB6C0D22966065C00449CE9 /* InfoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB6C0D12966065C00449CE9 /* InfoCollectionView.swift */; };
+		EDE0D1FE296CC98F00006CFC /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE0D1FD296CC98F00006CFC /* UIImage+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,8 @@
 		ED4426E82933E5AA00788069 /* RocketPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketPageViewController.swift; sourceTree = "<group>"; };
 		ED4426EA2933E75300788069 /* RocketViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketViewBuilder.swift; sourceTree = "<group>"; };
 		ED4426ED2933E7D100788069 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
+		ED522AE9296E061C00ECBF6B /* Int+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Ext.swift"; sourceTree = "<group>"; };
+		ED522AEB296E091400ECBF6B /* NSMutableAttributedString+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Ext.swift"; sourceTree = "<group>"; };
 		EDA2BE24296B2F1500B1875A /* LaunchesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesPresenter.swift; sourceTree = "<group>"; };
 		EDA2BE25296B2F1500B1875A /* LaunchesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesViewController.swift; sourceTree = "<group>"; };
 		EDA2BE2D296B321E00B1875A /* Launches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launches.swift; sourceTree = "<group>"; };
@@ -97,6 +102,7 @@
 		EDB6C0CD2964F10700449CE9 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		EDB6C0CF2964F45E00449CE9 /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
 		EDB6C0D12966065C00449CE9 /* InfoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCollectionView.swift; sourceTree = "<group>"; };
+		EDE0D1FD296CC98F00006CFC /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +353,9 @@
 				EDB6C0CB2964EF3A00449CE9 /* String+Ext.swift */,
 				EDB6C0CD2964F10700449CE9 /* Date+Ext.swift */,
 				EDA2BE2F296B34B100B1875A /* UIViewController+Ext.swift */,
+				EDE0D1FD296CC98F00006CFC /* UIImage+Ext.swift */,
+				ED522AE9296E061C00ECBF6B /* Int+Ext.swift */,
+				ED522AEB296E091400ECBF6B /* NSMutableAttributedString+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -497,6 +506,8 @@
 				EDA2BE33296B3BB500B1875A /* LaunchesView.swift in Sources */,
 				EDB6C0CE2964F10700449CE9 /* Date+Ext.swift in Sources */,
 				EDA2BE36296B3D2800B1875A /* LaunchCell.swift in Sources */,
+				ED522AEA296E061C00ECBF6B /* Int+Ext.swift in Sources */,
+				ED522AEC296E091400ECBF6B /* NSMutableAttributedString+Ext.swift in Sources */,
 				EDA2BE45296B6D6900B1875A /* SettingsController.swift in Sources */,
 				EDA2BE38296B59CE00B1875A /* ButtonView.swift in Sources */,
 				ED4426E32933E4CE00788069 /* RocketPresenter.swift in Sources */,
@@ -511,6 +522,7 @@
 				EDB6C0C92964E51800449CE9 /* InfoLabel.swift in Sources */,
 				ED4426E72933E57700788069 /* RocketViewController.swift in Sources */,
 				EDB6C0D22966065C00449CE9 /* InfoCollectionView.swift in Sources */,
+				EDE0D1FE296CC98F00006CFC /* UIImage+Ext.swift in Sources */,
 				EDA2BE27296B2F1500B1875A /* LaunchesPresenter.swift in Sources */,
 				EDA2BE47296B6E2400B1875A /* SettingView.swift in Sources */,
 				ED4426E92933E5AA00788069 /* RocketPageViewController.swift in Sources */,

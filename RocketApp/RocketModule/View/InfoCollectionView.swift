@@ -13,6 +13,7 @@ final class InfoCollectionView: UIView {
     init(frame: CGRect, dataSource: UICollectionViewDataSource) {
         super.init(frame: frame)
         setupCollectionView(dataSource: dataSource)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionInfo), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -39,5 +40,13 @@ final class InfoCollectionView: UIView {
             collectionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             heightAnchor.constraint(equalToConstant: 96)
         ])
+    }
+    
+    @objc private func reloadCollectionInfo() {
+        collectionView.reloadData()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
 }

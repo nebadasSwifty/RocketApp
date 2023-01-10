@@ -5,7 +5,7 @@
 //  Created by Кирилл on 04.01.2023.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     func formatStringToDate(initialFormat from: String) -> Date? {

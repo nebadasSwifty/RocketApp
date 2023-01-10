@@ -24,17 +24,15 @@ protocol LaunchesPresenterProtocol: AnyObject {
     func viewDidLoad()
 }
 
-class LaunchesPresenter: LaunchesPresenterProtocol {
+final class LaunchesPresenter: LaunchesPresenterProtocol {
     weak var view: LaunchesViewProtocol?
-    var rocketId: String?
-    var rocketName: String?
+    private var rocketId: String?
     var networkService: NetworkService?
     var launches: Launches = []
     
-    init(view: LaunchesViewProtocol? = nil, rocketId: String? = nil, networkService: NetworkService? = nil) {
+    init(view: LaunchesViewProtocol? = nil, rocketId: String? = nil) {
         self.view = view
         self.rocketId = rocketId
-        self.networkService = networkService
     }
 
     func viewDidLoad() {

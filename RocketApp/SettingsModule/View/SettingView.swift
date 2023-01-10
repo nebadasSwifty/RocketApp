@@ -49,7 +49,14 @@ final class SettingView: UIView {
         settingSegment.backgroundColor = #colorLiteral(red: 0.1726317704, green: 0.1726317704, blue: 0.1726317704, alpha: 1)
         settingSegment.selectedSegmentTintColor = .white
         settingSegment.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
-        settingSegment.selectedSegmentIndex = UserDefaults.standard.integer(forKey: nameSetting)
+        
+        guard let savedSegmentName = UserDefaults.standard.string(forKey: nameSetting),
+              let savedSegmentIndex = segmentNames.firstIndex(of: savedSegmentName) else {
+            settingSegment.selectedSegmentIndex = 0
+            return
+        }
+        
+        settingSegment.selectedSegmentIndex = savedSegmentIndex
     }
     
     private func setupLayout() {
@@ -64,6 +71,6 @@ final class SettingView: UIView {
     }
     
     @objc private func segmentValueChanged(_ sender: UISegmentedControl) {
-        UserDefaults.standard.set(sender.selectedSegmentIndex, forKey: nameSetting)
+        UserDefaults.standard.set(sender.titleForSegment(at: sender.selectedSegmentIndex), forKey: nameSetting)
     }
 }

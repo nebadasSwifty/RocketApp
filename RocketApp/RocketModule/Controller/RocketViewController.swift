@@ -46,21 +46,34 @@ final class RocketViewController: UIViewController {
         rocketView.addViewToContainer(view: InfoCollectionView(frame: .zero, dataSource: self))
         rocketView.addViewToContainer(view: InfoLabel(name: "Первый запуск", value: rocket.firstFlight.formatStringToDate(initialFormat: "yyyy-MM-dd")?.toString(formatter: "dd MMMM, yyyy") ?? ""))
         rocketView.addViewToContainer(view: InfoLabel(name: "Страна", value: rocket.country))
-        rocketView.addViewToContainer(view: InfoLabel(name: "Стоимость запуска", value: "\(rocket.costPerLaunch)"))
+        rocketView.addViewToContainer(view: InfoLabel(name: "Стоимость запуска", value: "$\(rocket.costPerLaunch.formatUsingAbbrevation())"))
         rocketView.addViewToContainer(view: HeaderLabel(headerName: "ПЕРВАЯ СТУПЕНЬ"))
         rocketView.addViewToContainer(view: InfoLabel(name: "Количество двигателей", value: "\(rocket.firstStage.engines)"))
-        rocketView.addViewToContainer(view: InfoLabel(name: "Количество топлива", value: "\(rocket.firstStage.fuelAmountTons)"))
-        rocketView.addViewToContainer(view: InfoLabel(name: "Время сгорания", value: "\(rocket.firstStage.burnTimeSEC ?? 0)"))
+        
+        let firstStageFuelAmounts = NSMutableAttributedString(string: "\(rocket.firstStage.fuelAmountTons) tons")
+        firstStageFuelAmounts.setColorForText("tons", with: .gray)
+        rocketView.addViewToContainer(view: InfoLabel(name: "Количество топлива", attributedValue: firstStageFuelAmounts))
+        
+        let firstStageBurnTime = NSMutableAttributedString(string: "\(rocket.firstStage.burnTimeSec ?? 0) sec")
+        firstStageBurnTime.setColorForText("sec", with: .gray)
+        rocketView.addViewToContainer(view: InfoLabel(name: "Время сгорания", attributedValue: firstStageBurnTime))
         rocketView.addViewToContainer(view: HeaderLabel(headerName: "ВТОРАЯ СТУПЕНЬ"))
         rocketView.addViewToContainer(view: InfoLabel(name: "Количество двигателей", value: "\(rocket.secondStage.engines)"))
-        rocketView.addViewToContainer(view: InfoLabel(name: "Количество топлива", value: "\(rocket.secondStage.fuelAmountTons)"))
-        rocketView.addViewToContainer(view: InfoLabel(name: "Время сгорания", value: "\(rocket.secondStage.burnTimeSEC ?? 0)"))
         
-        let launchesPresenter = LaunchesPresenter(rocketId: rocket.id, networkService: (parent as? RocketPageViewController)?.presenter?.networkService)
+        let secondStageFuelAmounts = NSMutableAttributedString(string: "\(rocket.secondStage.fuelAmountTons) tons")
+        secondStageFuelAmounts.setColorForText("tons", with: .gray)
+        rocketView.addViewToContainer(view: InfoLabel(name: "Количество топлива", attributedValue: secondStageFuelAmounts))
+        
+        let secondStageBurnTime = NSMutableAttributedString(string: "\(rocket.secondStage.burnTimeSec ?? 0) sec")
+        secondStageBurnTime.setColorForText("sec", with: .gray)
+        rocketView.addViewToContainer(view: InfoLabel(name: "Время сгорания", attributedValue: secondStageBurnTime))
+        
+        let launchesPresenter = LaunchesPresenter(rocketId: rocket.id)
         let launchesViewController = LaunchesViewController(presenter: launchesPresenter)
         launchesViewController.title = rocket.name
         
         rocketView.addViewToContainer(view: ButtonView(titleButton: "Посмотреть запуски", buttonAction: { [weak self] in
+            launchesPresenter.networkService = (self?.parent as? RocketPageViewController)?.presenter?.networkService
             self?.navigationController?.pushViewController(launchesViewController, animated: true)
         }))
     }
@@ -73,22 +86,35 @@ extension RocketViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InfoCell", for: indexPath) as? InfoCell else { return UICollectionViewCell() }
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
         switch indexPath.row {
         case 0:
-            let formattedNumber = numberFormatter.string(from: NSNumber(value: rocket.height.feet ?? 0))
-            cell.configure(name: "Высота", value: "\(formattedNumber ?? "")")
+            if let heightUnit = UserDefaults.standard.string(forKey: "height") {
+                let height = heightUnit == "ft" ? rocket.height.feet : rocket.height.meters
+                cell.configure(name: "Высота, \(heightUnit)", value: "\(height ?? 0)")
+            } else {
+                cell.configure(name: "Высота, m", value: "\(rocket.height.meters ?? 0)")
+            }
         case 1:
-            let formattedNumber = numberFormatter.string(from: NSNumber(value: rocket.diameter.feet ?? 0))
-            cell.configure(name: "Диаметр", value: "\(formattedNumber ?? "")")
+            if let diameterUnit = UserDefaults.standard.string(forKey: "diameter") {
+                let diameter = diameterUnit == "ft" ? rocket.diameter.feet : rocket.diameter.meters
+                cell.configure(name: "Диаметр, \(diameterUnit)", value: "\(diameter ?? 0)")
+            } else {
+                cell.configure(name: "Диаметр, m", value: "\(rocket.diameter.meters ?? 0)")
+            }
         case 2:
-            let formattedNumber = numberFormatter.string(from: NSNumber(value: rocket.mass.kg))
-            cell.configure(name: "Масса", value: "\(formattedNumber ?? "")")
+            if let massUnit = UserDefaults.standard.string(forKey: "mass") {
+                let mass = massUnit == "kg" ? rocket.mass.kg : rocket.mass.lb
+                cell.configure(name: "Масса, \(massUnit)", value: "\(mass)")
+            } else {
+                cell.configure(name: "Масса, kg", value: "\(rocket.mass.kg)")
+            }
         case 3:
-            let formattedNumber = numberFormatter.string(from: NSNumber(value: rocket.payloadWeights.first(where: { $0.id == "leo" })?.kg ?? 0))
-            cell.configure(name: "Нагрузка", value: "\(formattedNumber ?? "")")
+            if let payloadUnit = UserDefaults.standard.string(forKey: "payload") {
+                let payload = payloadUnit == "kg" ? rocket.payloadWeights.first(where: { $0.id == "leo" })?.kg : rocket.payloadWeights.first(where: { $0.id == "leo" })?.lb
+                cell.configure(name: "Нагрузка, \(payloadUnit)", value: "\(payload ?? 0)")
+            } else {
+                cell.configure(name: "Нагрузка, kg", value: "\(rocket.payloadWeights.first(where: { $0.id == "leo"} )?.kg ?? 0)")
+            }
         default:
             break
         }
