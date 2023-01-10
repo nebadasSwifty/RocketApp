@@ -51,7 +51,11 @@ final class SettingView: UIView {
         settingSegment.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
         
         guard let savedSegmentName = UserDefaults.standard.string(forKey: nameSetting),
-              let savedSegmentIndex = segmentNames.firstIndex(of: savedSegmentName) else { return }
+              let savedSegmentIndex = segmentNames.firstIndex(of: savedSegmentName) else {
+            settingSegment.selectedSegmentIndex = 0
+            return
+        }
+        
         settingSegment.selectedSegmentIndex = savedSegmentIndex
     }
     
