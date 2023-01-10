@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchesViewController: UIViewController, LaunchesViewProtocol {
+final class LaunchesViewController: UIViewController, LaunchesViewProtocol {
 	var presenter: LaunchesPresenterProtocol
     private var launchesView: LaunchesView! {
         return view as? LaunchesView

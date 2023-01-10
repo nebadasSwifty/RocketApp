@@ -13,7 +13,6 @@ protocol RocketViewBuilder {
 
 final class RocketViewBuilderImpl: RocketViewBuilder {
     static func buildViews(for rocket: Rocket) -> RocketViewController {
-        let rocketView = RocketViewController(rocket: rocket)
-        return rocketView
+        return RocketViewController(rocket: rocket)
     }
 }

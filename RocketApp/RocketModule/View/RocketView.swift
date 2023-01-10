@@ -76,7 +76,7 @@ final class RocketView: UIView {
     }
     
     func setupImageToView(data: Data? = nil, image: UIImage? = nil) {
-        rocketImageView.image = data != nil ? UIImage(data: data!) : image
+        rocketImageView.image = data != nil ? UIImage(data: data!)?.downsample(reductionAmount: 0.6) : image?.downsample(reductionAmount: 0.6)
     }
     
     func addViewToContainer(view: UIView) {

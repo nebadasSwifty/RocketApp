@@ -24,10 +24,11 @@ final class SettingsController: UIViewController {
     private func configure() {
         isModalInPresentation = true
         settingView.addViewToContainer(view: HeaderBar(closeButtonAction: { [weak self] in
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "reloadData"), object: nil)
             self?.dismiss(animated: true)
         }))
         settingView.addViewToContainer(view: SettingView(nameSetting: "height", name: "Высота", segmentNames: ["m", "ft"]))
-        settingView.addViewToContainer(view: SettingView(nameSetting: "diametr", name: "Диаметр", segmentNames: ["m", "ft"]))
+        settingView.addViewToContainer(view: SettingView(nameSetting: "diameter", name: "Диаметр", segmentNames: ["m", "ft"]))
         settingView.addViewToContainer(view: SettingView(nameSetting: "mass", name: "Масса", segmentNames: ["kg", "lb"]))
         settingView.addViewToContainer(view: SettingView(nameSetting: "payload", name: "Полезная нагрузка", segmentNames: ["kg", "lb"]))
     }

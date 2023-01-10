@@ -12,19 +12,19 @@ final class InfoLabel: UIView {
     private var nameLabel: UILabel!
     private var valueLabel: UILabel!
     
-    init(name: String, value: String) {
+    init(name: String, value: String? = nil, attributedValue: NSAttributedString? = nil) {
         super.init(frame: .zero)
-        setupView(name: name, value: value)
+        setupView(name: name, value: value, attributedValue: attributedValue)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupView(name: String, value: String) {
+    private func setupView(name: String, value: String? = nil, attributedValue: NSAttributedString? = nil) {
         setupContainer()
         setupNameLabel(name: name)
-        setupValueLabel(value: value)
+        setupValueLabel(value: value, attributedValue: attributedValue)
         setupLayout()
     }
     
@@ -44,12 +44,17 @@ final class InfoLabel: UIView {
         nameLabel.textColor = .gray
     }
     
-    private func setupValueLabel(value: String) {
+    private func setupValueLabel(value: String? = nil, attributedValue: NSAttributedString? = nil) {
         valueLabel = UILabel()
         container.addArrangedSubview(valueLabel)
-        valueLabel.text = value
-        valueLabel.textAlignment = .right
         valueLabel.textColor = .white
+        valueLabel.textAlignment = .right
+        
+        if value != nil {
+            valueLabel.text = value
+        } else {
+            valueLabel.attributedText = attributedValue
+        }
     }
     
     private func setupLayout() {

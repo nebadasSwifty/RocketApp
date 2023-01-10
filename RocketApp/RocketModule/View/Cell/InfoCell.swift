@@ -11,22 +11,31 @@ final class InfoCell: UICollectionViewCell {
     private var nameLabel: UILabel!
     private var valueLabel: UILabel!
     
-    private func setupNameLabel(name: String) {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupNameLabel()
+        setupValueLabel()
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    private func setupNameLabel() {
         nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(nameLabel)
         nameLabel.textColor = .gray
-        nameLabel.text = name
         nameLabel.textAlignment = .center
         nameLabel.font = UIFont.systemFont(ofSize: 14)
     }
     
-    private func setupValueLabel(value: String) {
+    private func setupValueLabel() {
         valueLabel = UILabel()
         valueLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(valueLabel)
         valueLabel.textColor = .white
-        valueLabel.text = value
         valueLabel.textAlignment = .center
         valueLabel.font = UIFont.boldSystemFont(ofSize: 16)
     }
@@ -47,8 +56,7 @@ final class InfoCell: UICollectionViewCell {
     }
     
     func configure(name: String, value: String) {
-        setupNameLabel(name: name)
-        setupValueLabel(value: value)
-        setupLayout()
+        nameLabel.text = name
+        valueLabel.text = value
     }
 }
