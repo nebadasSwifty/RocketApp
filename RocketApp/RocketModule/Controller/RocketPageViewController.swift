@@ -8,7 +8,7 @@
 import UIKit
 
 final class RocketPageViewController: UIPageViewController {
-    private var loadingView: UIActivityIndicatorView!
+    private var loadingView: UIActivityIndicatorView?
     var presenter: RocketPresenterProtocol?
     
     init(presenter: RocketPresenterProtocol? = nil) {
@@ -28,16 +28,16 @@ final class RocketPageViewController: UIPageViewController {
         delegate = self
         view.backgroundColor = #colorLiteral(red: 0.07058823529, green: 0.07058823529, blue: 0.07058823529, alpha: 1)
         
-        presenter?.viewDidLoad()
         presenter?.view = self
+        presenter?.viewDidLoad()
     }
     
     private func setupLoadingView() {
         loadingView = UIActivityIndicatorView()
-        loadingView.hidesWhenStopped = true
-        view.addSubview(loadingView)
-        loadingView.center = view.center
-        loadingView.startAnimating()
+        loadingView?.hidesWhenStopped = true
+        view.addSubview(loadingView!)
+        loadingView?.center = view.center
+        loadingView?.startAnimating()
     }
 }
 
@@ -46,7 +46,7 @@ extension RocketPageViewController: RocketViewProtocol {
         guard let view = view else { return }
         
         setViewControllers([view], direction: .forward, animated: true)
-        loadingView.stopAnimating()
+        loadingView?.stopAnimating()
     }
 }
 

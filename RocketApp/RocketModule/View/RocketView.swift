@@ -9,8 +9,8 @@ import UIKit
 
 final class RocketView: UIView {
     private var scrollView: UIScrollView!
-    private var container: UIStackView!
     private var rocketImageView: UIImageView!
+    var container: UIStackView!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
