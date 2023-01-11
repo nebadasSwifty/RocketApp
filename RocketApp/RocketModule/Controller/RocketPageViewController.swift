@@ -26,9 +26,10 @@ final class RocketPageViewController: UIPageViewController {
         setupLoadingView()
         dataSource = self
         delegate = self
+        view.backgroundColor = #colorLiteral(red: 0.07058823529, green: 0.07058823529, blue: 0.07058823529, alpha: 1)
         
-        presenter?.view = self
         presenter?.viewDidLoad()
+        presenter?.view = self
     }
     
     private func setupLoadingView() {
