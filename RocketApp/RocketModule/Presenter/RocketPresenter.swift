@@ -29,12 +29,12 @@ final class RocketPresenter: RocketPresenterProtocol {
     weak var view: RocketViewProtocol?
     var networkService: NetworkService?
     var rocketViews: [RocketViewController] = []
-    
+
     init(view: RocketViewProtocol? = nil, networkService: NetworkService? = nil) {
         self.view = view
         self.networkService = networkService
     }
-    
+
     func viewDidLoad() {
         networkService?.get(from: .rockets, completionHandler: { [weak self] (result: Result<Rockets, Error>) in
             switch result {
@@ -43,10 +43,10 @@ final class RocketPresenter: RocketPresenterProtocol {
                     (self?.view as? UIViewController)?.presentError(error: RocketPresenterError.rocketsIsEmpty)
                     return
                 }
-                
+
                 let group = DispatchGroup()
                 var imageDatas: [String?: Data] = [:]
-                
+
                 rockets.forEach({ rocket in
                     group.enter()
                     self?.networkService?.fetchImage(url: rocket.flickrImages.first, completionHandler: { result in
@@ -59,12 +59,12 @@ final class RocketPresenter: RocketPresenterProtocol {
 
                         group.leave()
                     })
-                    
+
                     group.notify(queue: .main) {
                         let rocketView = RocketViewBuilderImpl.buildViews(for: rocket)
                         rocketView.setupImage(from: imageDatas[rocket.flickrImages.first])
                         self?.rocketViews.append(rocketView)
-                        
+
                         if self?.rocketViews.count ?? 0 == rockets.count {
                             self?.view?.setView(view: self?.rocketViews.first)
                         }

@@ -7,6 +7,7 @@
 
 typealias Rockets = [Rocket]
 
+// swiftlint:disable all
 struct Rocket: Decodable {
     let height: Diameter
     let diameter: Diameter

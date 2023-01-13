@@ -26,28 +26,28 @@ protocol NetworkService {
 
 final class NetworkServiceImpl: NetworkService {
     private let urlSession = URLSession(configuration: .default)
-    
+
     func get<T: Decodable>(from endpoint: Endpoint, completionHandler: @escaping (Result<[T], Error>) -> Void) {
         guard let url = URL(string: endpoint.rawValue) else {
             completionHandler(.failure(NetworkError.endpointIsInvalid))
             return
         }
-        
+
         urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
             }
-            
+
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else {
                 completionHandler(.failure(NetworkError.responseError))
                 return
             }
-            
+
             guard let data = data else {
                 completionHandler(.failure(NetworkError.dataIsInvalid))
                 return
             }
-            
+
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -58,29 +58,29 @@ final class NetworkServiceImpl: NetworkService {
             }
         }.resume()
     }
-    
+
     func fetchImage(url: String?, completionHandler: @escaping (Result<Data, Error>) -> Void) {
         guard let urlString = url,
               let url = URL(string: urlString) else {
             completionHandler(.failure(NetworkError.endpointIsInvalid))
             return
         }
-        
+
         urlSession.dataTask(with: url) { data, response, error in
             if let error = error {
                 completionHandler(.failure(error))
             }
-            
+
             guard let response = response as? HTTPURLResponse, 200..<300 ~= response.statusCode else {
                 completionHandler(.failure(NetworkError.responseError))
                 return
             }
-            
+
             guard let data = data else {
                 completionHandler(.failure(NetworkError.dataIsInvalid))
                 return
             }
-            
+
             completionHandler(.success(data))
         }.resume()
     }

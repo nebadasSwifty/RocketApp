@@ -8,6 +8,7 @@
 import XCTest
 @testable import RocketApp
 
+// swiftlint:disable all
 final class LaunchesModuleTests: XCTestCase {
     var networkService: MockNetworkService!
     var launchModel: LaunchElement!

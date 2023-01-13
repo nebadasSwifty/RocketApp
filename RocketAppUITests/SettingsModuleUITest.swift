@@ -6,7 +6,7 @@
 //
 
 import XCTest
-
+// swiftlint:disable all
 final class SettingsModuleUITest: XCTestCase {
 
     override func setUpWithError() throws {

@@ -10,20 +10,20 @@ import UIKit
 final class HeaderBar: UIView {
     private var nameLabel: UILabel!
     private var closeButton: UIButton!
-    private var closeButtonAction: (() -> ())?
-    
-    init(closeButtonAction: (() -> ())? = nil) {
+    private var closeButtonAction: (() -> Void)?
+
+    init(closeButtonAction: (() -> Void)? = nil) {
         self.closeButtonAction = closeButtonAction
         super.init(frame: .zero)
         setupNameLabel()
         setupCloseButton()
         setupLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupNameLabel() {
         nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -32,7 +32,7 @@ final class HeaderBar: UIView {
         nameLabel.textColor = .white
         nameLabel.font = UIFont.boldSystemFont(ofSize: 16)
     }
-    
+
     private func setupCloseButton() {
         closeButton = UIButton(type: .system)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -43,7 +43,7 @@ final class HeaderBar: UIView {
         closeButton.setTitleColor(.white, for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonIsTapped), for: .touchUpInside)
     }
-    
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor),
@@ -54,7 +54,7 @@ final class HeaderBar: UIView {
             closeButton.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
-    
+
     @objc private func closeButtonIsTapped() {
         closeButtonAction?()
     }

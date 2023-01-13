@@ -12,7 +12,7 @@ final class LaunchCell: UITableViewCell {
     private var dateLabel: UILabel!
     private var statusImageView: UIImageView!
     private var infoBackgroundView: UIView!
-    
+
     private func setupNameLabel(name: String) {
         nameLabel = UILabel()
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ final class LaunchCell: UITableViewCell {
         nameLabel.textColor = .white
         nameLabel.font = UIFont.systemFont(ofSize: 20)
     }
-    
+
     private func setupDateLabel(dateValue: String) {
         dateLabel = UILabel()
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -30,13 +30,13 @@ final class LaunchCell: UITableViewCell {
         dateLabel.textColor = .gray
         dateLabel.font = UIFont.systemFont(ofSize: 16)
     }
-    
+
     private func setupStatusImageView(status: Bool) {
         statusImageView = UIImageView(image: status ? UIImage(named: "successRocket") : UIImage(named: "failureRocket"))
         statusImageView.translatesAutoresizingMaskIntoConstraints = false
         infoBackgroundView.addSubview(statusImageView)
     }
-    
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
             infoBackgroundView.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
@@ -55,7 +55,7 @@ final class LaunchCell: UITableViewCell {
             statusImageView.centerYAnchor.constraint(equalTo: infoBackgroundView.centerYAnchor)
         ])
     }
-    
+
     private func setupBackgroundView() {
         infoBackgroundView = UIView()
         infoBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +63,7 @@ final class LaunchCell: UITableViewCell {
         infoBackgroundView.backgroundColor = #colorLiteral(red: 0.1726317704, green: 0.1726317704, blue: 0.1726317704, alpha: 1)
         infoBackgroundView.layer.cornerRadius = 24
     }
-    
+
     func configureCell(name: String, date: String, status: Bool) {
         selectionStyle = .none
         backgroundColor = .clear
