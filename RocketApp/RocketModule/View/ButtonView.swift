@@ -9,18 +9,18 @@ import UIKit
 
 final class ButtonView: UIView {
     private var button: UIButton!
-    private var buttonAction: (() -> ())?
-    
-    init(titleButton: String, buttonAction: (() -> ())? = nil) {
+    private var buttonAction: (() -> Void)?
+
+    init(titleButton: String, buttonAction: (() -> Void)? = nil) {
         super.init(frame: .zero)
         self.buttonAction = buttonAction
         setupButton(title: titleButton)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupButton(title: String) {
         button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -30,7 +30,7 @@ final class ButtonView: UIView {
         button.backgroundColor = #colorLiteral(red: 0.1726317704, green: 0.1726317704, blue: 0.1726317704, alpha: 1)
         button.titleLabel?.textColor = .white
         button.layer.cornerRadius = 12
-        
+
         NSLayoutConstraint.activate([
             button.topAnchor.constraint(equalTo: topAnchor),
             button.leftAnchor.constraint(equalTo: leftAnchor),
@@ -39,7 +39,7 @@ final class ButtonView: UIView {
             button.heightAnchor.constraint(equalTo: heightAnchor)
         ])
     }
-    
+
     @objc private func buttonTapped() {
         buttonAction?()
     }

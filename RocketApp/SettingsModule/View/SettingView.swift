@@ -12,7 +12,7 @@ final class SettingView: UIView {
     private var nameLabel: UILabel!
     private var settingSegment: UISegmentedControl!
     private var nameSetting: String
-    
+
     init(nameSetting: String, name: String, segmentNames: [String]) {
         self.nameSetting = nameSetting
         super.init(frame: .zero)
@@ -21,11 +21,11 @@ final class SettingView: UIView {
         setupSettingSegment(segmentNames: segmentNames)
         setupLayout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func setupContainer() {
         container = UIStackView(frame: .zero)
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -33,7 +33,7 @@ final class SettingView: UIView {
         container.axis = .horizontal
         container.distribution = .fillProportionally
     }
-    
+
     private func setupNameLabel(name: String) {
         nameLabel = UILabel()
         container.addArrangedSubview(nameLabel)
@@ -41,7 +41,7 @@ final class SettingView: UIView {
         nameLabel.textColor = .white
         nameLabel.textAlignment = .left
     }
-    
+
     private func setupSettingSegment(segmentNames: [String]) {
         settingSegment = UISegmentedControl(items: segmentNames)
         settingSegment.translatesAutoresizingMaskIntoConstraints = false
@@ -49,16 +49,16 @@ final class SettingView: UIView {
         settingSegment.backgroundColor = #colorLiteral(red: 0.1726317704, green: 0.1726317704, blue: 0.1726317704, alpha: 1)
         settingSegment.selectedSegmentTintColor = .white
         settingSegment.addTarget(self, action: #selector(segmentValueChanged(_:)), for: .valueChanged)
-        
+
         guard let savedSegmentName = UserDefaults.standard.string(forKey: nameSetting),
               let savedSegmentIndex = segmentNames.firstIndex(of: savedSegmentName) else {
             settingSegment.selectedSegmentIndex = 0
             return
         }
-        
+
         settingSegment.selectedSegmentIndex = savedSegmentIndex
     }
-    
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: topAnchor),
@@ -69,7 +69,7 @@ final class SettingView: UIView {
             settingSegment.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-    
+
     @objc private func segmentValueChanged(_ sender: UISegmentedControl) {
         UserDefaults.standard.set(sender.titleForSegment(at: sender.selectedSegmentIndex), forKey: nameSetting)
     }

@@ -16,4 +16,3 @@ struct LaunchElement: Decodable {
     let rocket: String
     let success: Bool?
 }
-

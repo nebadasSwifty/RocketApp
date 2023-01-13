@@ -21,7 +21,7 @@ final class LaunchesViewController: UIViewController, LaunchesViewProtocol {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         view = LaunchesView()
     }
@@ -31,11 +31,11 @@ final class LaunchesViewController: UIViewController, LaunchesViewProtocol {
 
         presenter.view = self
         presenter.viewDidLoad()
-        
+
         launchesView.tableView.delegate = self
         launchesView.tableView.dataSource = self
     }
-    
+
     func initialSetup() {
         launchesView.tableView.reloadData()
     }
@@ -49,14 +49,21 @@ extension LaunchesViewController: UITableViewDelegate {
 
 extension LaunchesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.launches.count 
+        return presenter.launches.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchCell") as? LaunchCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LaunchCell") as? LaunchCell else {
+            return UITableViewCell()
+        }
         let launch = presenter.launches[indexPath.row]
-        cell.configureCell(name: launch.name, date: launch.dateLocal.formatStringToDate(initialFormat: "yyyy-MM-dd'T'HH:mm:ssZ")?.toString(formatter: "dd MMMM, yyyy") ?? "", status: Bool(launch.success ?? false) )
-        
+        cell.configureCell(name: launch.name,
+                           date: launch.dateLocal
+                                .formatStringToDate(initialFormat: "yyyy-MM-dd'T'HH:mm:ssZ")?
+                                .toString(formatter: "dd MMMM, yyyy") ?? "",
+                           status: Bool(launch.success ?? false)
+        )
+
         return cell
     }
 }

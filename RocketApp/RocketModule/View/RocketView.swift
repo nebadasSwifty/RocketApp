@@ -11,31 +11,31 @@ final class RocketView: UIView {
     private var scrollView: UIScrollView!
     private var rocketImageView: UIImageView!
     var container: UIStackView!
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupView()
     }
-    
+
     private func setupView() {
         setupScrollView()
         setupImageView()
         setupContainer()
         setupLayout()
     }
-    
+
     private func setupImageView() {
         rocketImageView = UIImageView()
         rocketImageView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addSubview(rocketImageView)
         rocketImageView.contentMode = .scaleAspectFill
     }
-    
+
     private func setupScrollView() {
         scrollView = UIScrollView(frame: .zero)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -45,7 +45,7 @@ final class RocketView: UIView {
         addSubview(scrollView)
         scrollView.backgroundColor = .black
     }
-    
+
     private func setupContainer() {
         container = UIStackView(frame: .zero)
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ final class RocketView: UIView {
         container.layoutMargins = UIEdgeInsets(top: 48, left: 32, bottom: 8, right: 32)
         container.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
-    
+
     private func setupLayout() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -77,11 +77,12 @@ final class RocketView: UIView {
             container.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
     }
-    
+
     func setupImageToView(data: Data? = nil, image: UIImage? = nil) {
+        // swiftlint: disable line_length
         rocketImageView.image = data != nil ? UIImage(data: data!)?.downsample(reductionAmount: 0.6) : image?.downsample(reductionAmount: 0.6)
     }
-    
+
     func addViewToContainer(view: UIView) {
         container.addArrangedSubview(view)
     }

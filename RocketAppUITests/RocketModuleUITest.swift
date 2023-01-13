@@ -8,6 +8,7 @@
 import XCTest
 @testable import RocketApp
 
+// swiftlint:disable all
 final class RocketModuleUITest: XCTestCase {
     override func setUpWithError() throws {
         continueAfterFailure = false

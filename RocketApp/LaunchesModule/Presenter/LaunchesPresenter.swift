@@ -12,7 +12,7 @@ protocol LaunchesViewProtocol: AnyObject {
     func initialSetup()
 }
 
-//MARK: Error -
+// MARK: Error -
 enum LaunchesPresenterError: Error {
     case launchesIsEmpty
 }
@@ -29,7 +29,7 @@ final class LaunchesPresenter: LaunchesPresenterProtocol {
     private var rocketId: String?
     var networkService: NetworkService?
     var launches: Launches = []
-    
+
     init(view: LaunchesViewProtocol? = nil, rocketId: String? = nil) {
         self.view = view
         self.rocketId = rocketId
@@ -43,7 +43,7 @@ final class LaunchesPresenter: LaunchesPresenterProtocol {
                     (self?.view as? UIViewController)?.presentError(error: LaunchesPresenterError.launchesIsEmpty)
                     return
                 }
-                
+
                 self?.launches = launches.filter({ $0.rocket == self?.rocketId })
                 DispatchQueue.main.async {
                     self?.view?.initialSetup()
